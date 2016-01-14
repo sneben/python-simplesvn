@@ -1,3 +1,10 @@
+.. image:: https://travis-ci.org/sneben/python-simplesvn.svg?branch=master
+    :target: https://travis-ci.org/sneben/python-simplesvn
+
+.. image:: https://coveralls.io/repos/sneben/python-simplesvn/badge.svg?branch=master&service=github
+    :target: https://coveralls.io/github/sneben/python-simplesvn?branch=master
+
+
 =========
 simplesvn
 =========
