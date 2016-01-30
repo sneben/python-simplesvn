@@ -1,4 +1,4 @@
-sudo: false
+sudo: true
 language: python
 python:
   - "2.6"
@@ -6,6 +6,9 @@ python:
 install:
   - pip install pybuilder coveralls
   - pyb -v install_dependencies
+before_script:
+  - sudo apt-get update
+  - sudo apt-get install python-svn
 script:
   - pyb -v verify analyze
 after_success:
