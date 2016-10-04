@@ -7,6 +7,11 @@ import shutil
 import tempfile
 
 
+class RemoteFileNotFoundError(Exception):
+    """Exception class for throwing RemoteFileNotFoundError exceptions"""
+    pass
+
+
 class SVNClient(object):
     """Class subversion usage with specialized calls"""
 
@@ -63,7 +68,11 @@ class SVNClient(object):
 
     def get_file_content(self, source=None):
         """Read out the content of the given file directly from subversion"""
-        return self.__client.cat(source)
+        try:
+            return self.__client.cat(source)
+        except pysvn.ClientError as error:
+            if 'path not found' in error:
+                raise RemoteFileNotFoundError(error)
 
     def exists(self, source):
         """Check if the given svn ressource exists"""
