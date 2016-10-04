@@ -2,5 +2,6 @@
 # -*- coding: utf-8 -*-
 
 from .client import SVNClient
+from .client import RemoteFileNotFoundError
 
-__all__ = ['SVNClient']
+__all__ = ['SVNClient', 'RemoteFileNotFoundError']
