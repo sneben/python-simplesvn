@@ -71,7 +71,7 @@ class SVNClient(object):
         try:
             return self._client.cat(source)
         except pysvn.ClientError as error:
-            if 'path not found' in error:
+            if 'path not found' in error.message:
                 raise RemoteFileNotFoundError(error)
 
     def exists(self, source):
