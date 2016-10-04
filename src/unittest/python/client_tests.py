@@ -3,7 +3,7 @@
 
 """Test suite for simplesvn client functionality"""
 
-from mock import patch, call
+from mock import patch, call, Mock
 from unittest2 import TestCase
 from simplesvn import SVNClient
 
@@ -74,5 +74,9 @@ class SVNClientTests(TestCase):
         result = self.client.list('https://localhost/svn/repo')
 
     def test_should_find(self):
+        self.client._client = Mock()
+        Client_result_entry = Mock()
+        Client_result_entry.repos_path = '/repo/hosts'
+        self.client._client.list.return_value = [[Client_result_entry]]
         result = self.client.find('https://localhost/svn/repo',
                                   '*.yaml', depth=1)
