@@ -74,6 +74,12 @@ class SVNClient(object):
             if 'path not found' in error.message:
                 raise RemoteFileNotFoundError(error)
 
+    def is_under_control(self, path):
+        """Check if the given path is under subversion control"""
+        if self._client.info(path):
+            return True
+        return False
+
     def exists(self, source):
         """Check if the given svn ressource exists"""
         try:

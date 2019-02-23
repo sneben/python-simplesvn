@@ -69,6 +69,15 @@ the need of a checkout.
 URL of the files svn location. For example:
 ``https://svn.example.com/repo/file``.
 
+is_under_control
+----------------
+Check if the given path is under subversion control.
+
+:Parameter: *path*
+
+Path inside checked out repository. Returns **False** if the path
+is not under subversion control.
+
 exists
 ------
 Check if the given svn ressource exists. Returns ``True`` if exist and
