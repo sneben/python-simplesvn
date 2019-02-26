@@ -80,3 +80,7 @@ class SVNClientTests(TestCase):
         self.client._client.list.return_value = [[Client_result_entry]]
         result = self.client.find('https://localhost/svn/repo',
                                   '*.yaml', depth=1)
+
+    def test_should_export(self):
+        revision, message = self.client.export('https://localhost/svn/repo',
+                                               '/tmp/test')

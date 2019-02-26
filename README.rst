@@ -75,7 +75,7 @@ Check if the given path is under subversion control.
 
 :Parameter: *path*
 
-Path inside checked out repository. Returns **False** if the path
+Path inside checked out repository. Returns ``False`` if the path
 is not under subversion control.
 
 exists
