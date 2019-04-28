@@ -7,6 +7,11 @@ import shutil
 import tempfile
 
 
+class ClientError(Exception):
+    """Exception class for throwing ClientError exceptions"""
+    pass
+
+
 class RemoteFileNotFoundError(Exception):
     """Exception class for throwing RemoteFileNotFoundError exceptions"""
     pass
@@ -19,7 +24,8 @@ class SVNClient(object):
         self._client = pysvn.Client()
         self._user = user
         self._password = password
-        self._client.callback_ssl_server_trust_prompt = self.callback_ssl_server_trust_prompt
+        self._client.callback_ssl_server_trust_prompt = \
+            self.callback_ssl_server_trust_prompt
         self._client.callback_get_login = self.callback_get_login
         self._client.callback_get_log_message = self.callback_get_log_message
         self._log_message = None
@@ -47,9 +53,12 @@ class SVNClient(object):
         else:
             depth = pysvn.depth.immediates
         entries = []
-        for entry in self._client.list(source, depth=depth):
-            if not source.endswith(entry[0].repos_path):
-                entries.append(entry[0].repos_path.replace('//', '/'))
+        try:
+            for entry in self._client.list(source, depth=depth):
+                if not source.endswith(entry[0].repos_path):
+                    entries.append(entry[0].repos_path.replace('//', '/'))
+        except pysvn._pysvn_2_7.ClientError as error:
+            raise ClientError(error)
         return entries
 
     def get_changed_paths(self, source, start=1):
