@@ -10,7 +10,7 @@ install:
 before_script:
   - sudo apt-get update
   - sudo apt-get install python3-svn
-  - ln -s /usr/lib/python3/dist-packages/pysvn $VIRTUAL_ENV/lib/python3/site-packages/
+  - ln -s /usr/lib/python3.5.7/dist-packages/pysvn $VIRTUAL_ENV/lib/python3/site-packages/
 script:
   - pyb -v verify analyze
 after_success:
