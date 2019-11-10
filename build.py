@@ -31,4 +31,4 @@ def set_properties(project):
 @task
 @depends('prepare')
 def build_directory(project):
-    print project.expand_path("$dir_dist")
+    print(project.expand_path("$dir_dist"))
