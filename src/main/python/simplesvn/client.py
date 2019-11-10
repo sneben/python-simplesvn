@@ -71,14 +71,14 @@ class SVNClient(object):
                 # Ignore deleted folders/files, but always add entries
                 # with path count greater than the given start value
                 if not (path.get('action') == 'D' and
-                   len(filter(None, path.get('path').split('/'))) <= start):
+                   len(list(filter(None, path.get('path').split('/')))) <= start):
                     path_list.append(path.get('path'))
         return path_list
 
     def get_file_content(self, source=None):
         """Read out the content of the given file directly from subversion"""
         try:
-            return self._client.cat(source)
+            return self._client.cat(source).decode()
         except pysvn.ClientError as error:
             if 'path not found' in error.message:
                 raise RemoteFileNotFoundError(error)
